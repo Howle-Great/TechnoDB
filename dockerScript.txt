@@ -1,0 +1,11 @@
+﻿docker run --name some-postgres -e POSTGRES_PASSWORD=password1 -d postgres
+docker run -it -p 5432:5432 -e POSTGRES_PASSWORD=password1 -d postgres postgress --name some-postgres3
+
+docker run --rm --name pg-docker -e POSTGRES_PASSWORD=docker -d -p 5432:5432 -v /Users/howle/prog/2019.1/Park/Homework/db/bd_16_06_19/postgres  postgres
+
+
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q) 
+
+// curl
+curl -d "slug=pirate-stories1&title=Pirate stories&user=j.sparrow" http://127.0.0.1:5000/api/forum/create

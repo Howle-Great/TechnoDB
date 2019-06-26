@@ -1,0 +1,6 @@
+﻿*.tmp
+*.DS_Store
+*.out
+*.gz
+report.html
+.vscode
