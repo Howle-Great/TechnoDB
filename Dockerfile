@@ -9,7 +9,7 @@ RUN apt-get update && \
 
 # Клонируем проект
 USER root
-RUN git clone https://github.com/Howle/TechnoDB.git
+RUN git clone https://github.com/Howle-Great/TechnoDB.git
 WORKDIR TechnoDB
 
 # Устанавливаем PostgreSQL
