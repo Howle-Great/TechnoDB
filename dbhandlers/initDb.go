@@ -14,12 +14,12 @@ func (db *DataBase) Connetc() error {
 	conConfig := pgx.ConnConfig {
 		Host: 			"127.0.0.1",
 		Port: 			5432,
-		Database: 		"new_database",
+		Database: 		"docker",
 		User: 			"docker",
 		Password: 		"docker",
 		TLSConfig: 		nil,
 		UseFallbackTLS: false,
-		RuntimeParams: 	map[string]string{"application_name": "new_schema"},
+		RuntimeParams: 	map[string]string{"application_name": "dz"},
 	}
 	poolConfig := pgx.ConnPoolConfig{
 		ConnConfig:     conConfig,
