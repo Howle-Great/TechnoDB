@@ -9,7 +9,7 @@ import (
 func GetPost(id int) (*models.Post, error) {
 	post := models.Post{}
 
-	err := DB.pool.QueryRow(
+	err := DB.Pool.QueryRow(
 		`
 			SELECT id, author, message, forum, thread, created, "isEdited", parent
 			FROM posts 
@@ -75,7 +75,7 @@ func UpdatePost(postUpdate *models.PostUpdate, id int) (*models.Post, error) {
 		return post, nil
 	}
 
-	rows := DB.pool.QueryRow(`
+	rows := DB.Pool.QueryRow(`
 			UPDATE posts 
 			SET message = COALESCE($2, message), "isEdited" = ($2 IS NOT NULL AND $2 <> message) 
 			WHERE id = $1 

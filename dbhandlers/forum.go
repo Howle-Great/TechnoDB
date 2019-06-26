@@ -7,7 +7,7 @@ import (
 
 // /forum/create Создание форума
 func CreateForum(f *models.Forum) (*models.Forum, error) {
-	err := DB.pool.QueryRow(
+	err := DB.Pool.QueryRow(
 		`
 			INSERT INTO forum (slug, title, "user")
 			VALUES ($1, $2, (
@@ -37,7 +37,7 @@ func CreateForum(f *models.Forum) (*models.Forum, error) {
 func GetForum(slug string) (*models.Forum, error) {
 	f := models.Forum{}
 
-	err := DB.pool.QueryRow(
+	err := DB.Pool.QueryRow(
 		`
 			SELECT slug, title, "user", posts, threads
 			FROM forum
@@ -68,7 +68,7 @@ func CreateForumThread(t *models.Thread) (*models.Thread, error) {
 		}
 	}
 
-	err := DB.pool.QueryRow(
+	err := DB.Pool.QueryRow(
 		`
 			INSERT INTO threads (author, created, message, title, slug, forum)
 			VALUES ($1, $2, $3, $4, $5, (SELECT slug FROM forums WHERE slug = $6)) 
@@ -141,9 +141,9 @@ func GetForumThreads(slug, limit, since, desc string) (*models.Threads, error) {
 	var err error
 
 	if since != "" {
-		rows, err = DB.pool.Query(queryForumWithSience[desc], slug, since, limit)
+		rows, err = DB.Pool.Query(queryForumWithSience[desc], slug, since, limit)
 	} else {
-		rows, err = DB.pool.Query(queryForumNoSience[desc], slug, limit)
+		rows, err = DB.Pool.Query(queryForumNoSience[desc], slug, limit)
 	}
 	defer rows.Close()
 
@@ -226,9 +226,9 @@ func GetForumUsers(slug, limit, since, desc string) (*models.Users, error) {
 	var err error
 	
 	if since != "" {
-		rows, err = DB.pool.Query(queryForumUserWithSience[desc], slug, since, limit)
+		rows, err = DB.Pool.Query(queryForumUserWithSience[desc], slug, since, limit)
 	} else {
-		rows, err = DB.pool.Query(queryForumUserNoSience[desc], slug, limit)
+		rows, err = DB.Pool.Query(queryForumUserNoSience[desc], slug, limit)
 	}
 	defer rows.Close()
 

@@ -22,7 +22,7 @@ func GetThread(param string) (*models.Thread, error) {
 
 	if isNumber(param) {
 		id, _ := strconv.Atoi(param)
-		err = DB.pool.QueryRow(
+		err = DB.Pool.QueryRow(
 			`
 				SELECT id, title, author, forum, message, votes, slug, created
 				FROM threads
@@ -40,7 +40,7 @@ func GetThread(param string) (*models.Thread, error) {
 			&thread.Created,
 		)
 	} else {
-		err = DB.pool.QueryRow(
+		err = DB.Pool.QueryRow(
 			`
 				SELECT id, title, author, forum, message, votes, slug, created
 				FROM threads
@@ -75,7 +75,7 @@ func UpdateThread(thread *models.ThreadUpdate, param string) (*models.Thread, er
 
 	updatedThread := models.Thread{}
 
-	err = DB.pool.QueryRow(`
+	err = DB.Pool.QueryRow(`
 			UPDATE threads
 			SET title = coalesce(nullif($2, ''), title),
 				message = coalesce(nullif($3, ''), message)
@@ -105,7 +105,7 @@ func UpdateThread(thread *models.ThreadUpdate, param string) (*models.Thread, er
 
 func authorExists(nickname string) bool {
 	var user models.User
-	err :=  DB.pool.QueryRow(
+	err :=  DB.Pool.QueryRow(
 		`
 			SELECT "nickname", "fullname", "email", "about"
 			FROM users
@@ -133,7 +133,7 @@ const postID = `
 
 func parentExitsInOtherThread(parent int64, threadID int32) bool {
 	var t int64
-	err := DB.pool.QueryRow(postID, parent, threadID).Scan(&t)
+	err := DB.Pool.QueryRow(postID, parent, threadID).Scan(&t)
 
 	if err != nil && err.Error() == noRowsInResult {
 		return false
@@ -147,7 +147,7 @@ func parentNotExists(parent int64) bool {
 	}
 
 	var t int64
-	err := DB.pool.QueryRow(`SELECT id FROM posts WHERE id = $1`, parent).Scan(&t); 
+	err := DB.Pool.QueryRow(`SELECT id FROM posts WHERE id = $1`, parent).Scan(&t); 
 	
 	if err != nil {
 		return true
@@ -197,7 +197,7 @@ func CreateThread(posts *models.Posts, param string) (*models.Posts, error) {
 	}
 	query.WriteString("RETURNING author, created, forum, id, message, parent, thread")
 
-	tx, txErr := DB.pool.Begin()
+	tx, txErr := DB.Pool.Begin()
 	if txErr != nil {
 		return nil, txErr
 	}
@@ -370,10 +370,10 @@ func GetThreadPosts(param, limit, since, sort, desc string) (*models.Posts, erro
 
 	if since != "" {
 		query := queryPostsWithSience[desc][sort]
-		rows, err = DB.pool.Query(query, thread.ID, since, limit)
+		rows, err = DB.Pool.Query(query, thread.ID, since, limit)
 	} else {
 		query := queryPostsNoSience[desc][sort]
-		rows, err = DB.pool.Query(query, thread.ID, limit)
+		rows, err = DB.Pool.Query(query, thread.ID, limit)
 	}
 	defer rows.Close()
 
@@ -410,7 +410,7 @@ func GetThreadPosts(param, limit, since, sort, desc string) (*models.Posts, erro
 func MakeThreadVote(vote *models.Vote, param string) (*models.Thread, error) {
 	var err error
 
-	tx, txErr := DB.pool.Begin()
+	tx, txErr := DB.Pool.Begin()
 	if txErr != nil {
 		return nil, txErr
 	}

@@ -2,11 +2,16 @@
 
 import(
 	"github.com/gin-gonic/gin"
+	"os"
+	"io"
 )
 
 func CreateRouter() (*gin.Engine) {
-	r := gin.Default()
-
+	f, _ := os.Create("gin.log")
+	gin.DefaultWriter = io.MultiWriter(f)
+	r := gin.New()
+	r.Use(gin.Logger())
+	
 	// Forum part
 	forumApi := r.Group("api/forum")
 	// forumApi.POST("create", CreateForum)

@@ -6,7 +6,7 @@ import (
 
 // /user/{nickname}/create Создание нового пользователя
 func CreateUser(u *models.User) (*models.Users, error)  {
-	rows, err := DB.pool.Exec(
+	rows, err := DB.Pool.Exec(
 		`
 			INSERT
 			INTO users ("nickname", "fullname", "email", "about")
@@ -23,7 +23,7 @@ func CreateUser(u *models.User) (*models.Users, error)  {
 
 	if rows.RowsAffected() == 0 { // пользователь уже есть
 		users := models.Users{}
-		queryRows, err := DB.pool.Query(`
+		queryRows, err := DB.Pool.Query(`
 				SELECT "nickname", "fullname", "email", "about"
 				FROM users
 				WHERE "nickname" = $1 OR "email" = $2
@@ -51,7 +51,7 @@ func CreateUser(u *models.User) (*models.Users, error)  {
 func GetUser(nickname string) (*models.User, error) {
 	user := models.User{}
 
-	err := DB.pool.QueryRow(`
+	err := DB.Pool.QueryRow(`
 			SELECT "nickname", "fullname", "email", "about"
 			FROM users
 			WHERE "nickname" = $1
@@ -72,7 +72,7 @@ func GetUser(nickname string) (*models.User, error) {
 
 // /user/{nickname}/profile Изменение данных о пользователе
 func UpdateUser(user *models.User) error {
-	err := DB.pool.QueryRow(
+	err := DB.Pool.QueryRow(
 		`
 			UPDATE users
 			SET fullname = coalesce(nullif($2, ''), fullname),

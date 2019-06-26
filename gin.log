@@ -1,0 +1,22 @@
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/forum/:slug/create   --> _/Users/howle/prog/2019.1/Park/Homework/db/bd_16_06_19/handlers.CreateSlug (2 handlers)
+[GIN-debug] GET    /api/forum/:slug/details  --> _/Users/howle/prog/2019.1/Park/Homework/db/bd_16_06_19/handlers.GetForum (2 handlers)
+[GIN-debug] GET    /api/forum/:slug/threads  --> _/Users/howle/prog/2019.1/Park/Homework/db/bd_16_06_19/handlers.GetForumThreads (2 handlers)
+[GIN-debug] GET    /api/forum/:slug/users    --> _/Users/howle/prog/2019.1/Park/Homework/db/bd_16_06_19/handlers.GetForumUsers (2 handlers)
+[GIN-debug] POST   /api/forum/:slug          --> _/Users/howle/prog/2019.1/Park/Homework/db/bd_16_06_19/handlers.CreateForum (2 handlers)
+[GIN-debug] GET    /api/post/:id/details     --> _/Users/howle/prog/2019.1/Park/Homework/db/bd_16_06_19/handlers.GetPost (2 handlers)
+[GIN-debug] POST   /api/post/:id/details     --> _/Users/howle/prog/2019.1/Park/Homework/db/bd_16_06_19/handlers.UpdatePost (2 handlers)
+[GIN-debug] POST   /api/service/clear        --> _/Users/howle/prog/2019.1/Park/Homework/db/bd_16_06_19/handlers.Clear (2 handlers)
+[GIN-debug] GET    /api/service/status       --> _/Users/howle/prog/2019.1/Park/Homework/db/bd_16_06_19/handlers.GetStatus (2 handlers)
+[GIN-debug] POST   /api/thread/:slug_or_id/create --> _/Users/howle/prog/2019.1/Park/Homework/db/bd_16_06_19/handlers.CreatePost (2 handlers)
+[GIN-debug] GET    /api/thread/:slug_or_id/details --> _/Users/howle/prog/2019.1/Park/Homework/db/bd_16_06_19/handlers.GetThread (2 handlers)
+[GIN-debug] POST   /api/thread/:slug_or_id/details --> _/Users/howle/prog/2019.1/Park/Homework/db/bd_16_06_19/handlers.UpdateThread (2 handlers)
+[GIN-debug] GET    /api/thread/:slug_or_id/posts --> _/Users/howle/prog/2019.1/Park/Homework/db/bd_16_06_19/handlers.GetThreadPosts (2 handlers)
+[GIN-debug] POST   /api/thread/:slug_or_id/vote --> _/Users/howle/prog/2019.1/Park/Homework/db/bd_16_06_19/handlers.MakeThreadVote (2 handlers)
+[GIN-debug] POST   /api/user/:nickname/create --> _/Users/howle/prog/2019.1/Park/Homework/db/bd_16_06_19/handlers.CreateUser (2 handlers)
+[GIN-debug] GET    /api/user/:nickname/profile --> _/Users/howle/prog/2019.1/Park/Homework/db/bd_16_06_19/handlers.GetUser (2 handlers)
+[GIN-debug] POST   /api/user/:nickname/profile --> _/Users/howle/prog/2019.1/Park/Homework/db/bd_16_06_19/handlers.UpdateUser (2 handlers)
+[GIN-debug] Listening and serving HTTP on :5000

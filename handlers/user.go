@@ -8,6 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 	_ "github.com/lib/pq"
 	"github.com/go-openapi/swag"
+	"log"
 )
 
 // /user/{nickname}/create Создание нового пользователя
@@ -22,6 +23,7 @@ func CreateUser(c *gin.Context) {
 	}	
 
 	result, err := dbhandlers.CreateUser(&newUser)
+	log.Panicln(result);
 
 	switch err {
 		case nil:

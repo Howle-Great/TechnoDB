@@ -9,3 +9,17 @@ docker rm $(docker ps -a -q)
 
 // curl
 curl -d "slug=pirate-stories1&title=Pirate stories&user=j.sparrow" http://127.0.0.1:5000/api/forum/create
+curl -d ""
+curl -v -d "nickname=123a" http:/localhost:5000/api/user/123/profile
+curl -v -d "about=123a&email=sdf&fullname=sfadffsdf" http:/localhost:5000/api/user/123/create
+curl -v -d "" http:/localhost:5000/api/clear
+curl -v http:/localhost:5000/api/cleara
+
+функциональный
+./tech-db-forum func -u http://localhost:5000/api -r report.html
+
+тест на заполнение базы (подготовка базы перед нагрузочным)
+./tech-db-forum fill —url = http://localhost:5000/api 
+
+нагрузочный
+./tech-db-forum perf —u http://localhost:5000/api —step=60 —duration=600

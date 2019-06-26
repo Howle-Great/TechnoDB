@@ -7,7 +7,7 @@ import (
 // /service/status Получение инфомарции о базе данных
 func GetStatus() *models.Status {
 	status := &models.Status{}
-	DB.pool.QueryRow(
+	DB.Pool.QueryRow(
 		`
 			SELECT 
 			(SELECT COUNT(*) FROM users) AS users,
@@ -26,7 +26,7 @@ func GetStatus() *models.Status {
 
 // /service/clear Очистка всех данных в базе
 func Clear() {
-	DB.pool.Exec(`
+	DB.Pool.Exec(`
 		TRUNCATE users, forums, threads, posts, votes, forum_users;
 	`)
 }
