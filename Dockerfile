@@ -36,7 +36,7 @@ USER root
 # Настраиваем сеть и БД
 RUN echo "local all all md5" > /etc/postgresql/$PGVERSION/main/pg_hba.conf &&\
     echo "host all all 0.0.0.0/0 md5" >> /etc/postgresql/$PGVERSION/main/pg_hba.conf
-RUN cat database/postgresql.conf >> /etc/postgresql/$PGVERSION/main/postgresql.conf
+RUN cat db/postgresql.conf >> /etc/postgresql/$PGVERSION/main/postgresql.conf
 VOLUME  ["/etc/postgresql", "/var/log/postgresql", "/var/lib/postgresql"]
 EXPOSE 5432
 
